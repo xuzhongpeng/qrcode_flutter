@@ -1,0 +1,14 @@
+.DS_Store
+.dart_tool/
+
+.packages
+.pub/
+
+build/
+
+example/build/
+example/.vscode
+example/.dart_tool
+
+.dart_tool
+.idea

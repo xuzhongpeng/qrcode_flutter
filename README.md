@@ -2,7 +2,7 @@
 
 Flutter plugin for scanning QR codes.You can customize your page by using PlatformView.Scanning Picture from path(photo album).
 
-You can download (flutter_demo.apk)[https://blog-1253495453.cos.ap-chongqing.myqcloud.com/app-debug.apk] for testing
+You can download [flutter_demo.apk](https://blog-1253495453.cos.ap-chongqing.myqcloud.com/app-debug.apk) for testing
 
 ## Usage
 

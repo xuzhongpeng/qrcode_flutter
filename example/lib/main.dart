@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                 var qrCodeResult =
                     await QRCaptureController.getQrCodeByImagePath(image.path);
                 setState(() {
-                  _captureText = qrCodeResult;
+                  _captureText = qrCodeResult.join('\n');
                 });
               },
               child: Text('photoAlbum', style: TextStyle(color: Colors.white)),

@@ -41,10 +41,11 @@ class QRCaptureController {
     _methodChannel?.invokeMethod('setTorchMode', isOn);
   }
 
-  static Future<String> getQrCodeByImagePath(String path) async {
+  static Future<List<String>> getQrCodeByImagePath(String path) async {
     var _methodChannel = MethodChannel('plugins/qr_capture/method');
-    var a = await _methodChannel?.invokeMethod("getQrCodeByImagePath", path);
-    return a;
+    var qrResult =
+        await _methodChannel?.invokeMethod("getQrCodeByImagePath", path);
+    return List<String>.from(qrResult);
   }
 }
 

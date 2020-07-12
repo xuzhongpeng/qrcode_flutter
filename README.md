@@ -38,7 +38,9 @@ class _MyAppState extends State<MyApp> {
                     await ImagePicker().getImage(source: ImageSource.gallery);
                 var qrCodeResult =
                     await QRCaptureController.getQrCodeByImagePath(image.path);
-                print(qrCodeResult);
+                setState(() {
+                  _captureText = qrCodeResult.join('\n');
+                });
               },
               child: Text('photoAlbum', style: TextStyle(color: Colors.white)),
             ),

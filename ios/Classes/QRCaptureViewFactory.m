@@ -2,7 +2,7 @@
 //  QRCaptureViewFactory.m
 //  Runner
 //
-//  Created by cdx on 2019/8/2.
+//  Created by xzp 2020/5/15.
 //  Copyright © 2019 The Chromium Authors. All rights reserved.
 //
 

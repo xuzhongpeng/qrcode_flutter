@@ -18,7 +18,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.platform.PlatformView
 
-class QRCaptureView(private val registrar: PluginRegistry.Registrar, id: Int) :
+class QRCaptureView(id: Int) :
         PlatformView, MethodCallHandler {
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call?.method) {
@@ -75,18 +75,16 @@ class QRCaptureView(private val registrar: PluginRegistry.Registrar, id: Int) :
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestingPermission = true
-                registrar
-                        .activity()
-                        .requestPermissions(
-                                arrayOf(Manifest.permission.CAMERA),
-                                CAMERA_REQUEST_ID)
+                FlutterRegister.getActivity()?.requestPermissions(
+                        arrayOf(Manifest.permission.CAMERA),
+                        CAMERA_REQUEST_ID)
             }
         }
     }
 
     private fun hasCameraPermission(): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-                activity.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                activity?.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
     }
 
     companion object {
@@ -94,16 +92,17 @@ class QRCaptureView(private val registrar: PluginRegistry.Registrar, id: Int) :
     }
 
     var barcodeView: BarcodeView? = null
-    private val activity = registrar.activity()
+    private val activity = FlutterRegister.getActivity()
     var cameraPermissionContinuation: Runnable? = null
     var requestingPermission = false
     val channel: MethodChannel
+
     init {
-        registrar.addRequestPermissionsResultListener(CameraRequestPermissionsListener())
-        channel = MethodChannel(registrar.messenger(), "plugins/qr_capture/method_$id")
+        FlutterRegister.addRequestPermissionsResultListener(CameraRequestPermissionsListener())
+        channel = MethodChannel(FlutterRegister.messenger, "plugins/qr_capture/method_$id")
         channel.setMethodCallHandler(this)
         checkAndRequestPermission(null)
-        val barcode = BarcodeView(registrar.activity())
+        val barcode = BarcodeView(FlutterRegister.getActivity())
         this.barcodeView = barcode
         barcode.decodeContinuous(
                 object : BarcodeCallback {
@@ -117,35 +116,35 @@ class QRCaptureView(private val registrar: PluginRegistry.Registrar, id: Int) :
 
         barcode.resume()
 
-        registrar.activity().application.registerActivityLifecycleCallbacks(
-         object : Application.ActivityLifecycleCallbacks {
-             override fun onActivityPaused(p0: Activity?) {
-                 if (p0 == registrar.activity()) {
-                     barcodeView?.pause()
-                 }
-             }
+        FlutterRegister.getActivity()?.application?.registerActivityLifecycleCallbacks(
+                object : Application.ActivityLifecycleCallbacks {
+                    override fun onActivityPaused(p0: Activity?) {
+                        if (p0 == FlutterRegister.getActivity()) {
+                            barcodeView?.pause()
+                        }
+                    }
 
-             override fun onActivityResumed(p0: Activity?) {
-                 if (p0 == registrar.activity()) {
-                     barcodeView?.resume()
-                 }
-             }
+                    override fun onActivityResumed(p0: Activity?) {
+                        if (p0 == FlutterRegister.getActivity()) {
+                            barcodeView?.resume()
+                        }
+                    }
 
-             override fun onActivityStarted(p0: Activity?) {
-             }
+                    override fun onActivityStarted(p0: Activity?) {
+                    }
 
-             override fun onActivityDestroyed(p0: Activity?) {
-             }
+                    override fun onActivityDestroyed(p0: Activity?) {
+                    }
 
-             override fun onActivitySaveInstanceState(p0: Activity?, p1: Bundle?) {
-             }
+                    override fun onActivitySaveInstanceState(p0: Activity?, p1: Bundle?) {
+                    }
 
-             override fun onActivityStopped(p0: Activity?) {
-             }
+                    override fun onActivityStopped(p0: Activity?) {
+                    }
 
-             override fun onActivityCreated(p0: Activity?, p1: Bundle?) {
-             }
-         }
+                    override fun onActivityCreated(p0: Activity?, p1: Bundle?) {
+                    }
+                }
         )
     }
 

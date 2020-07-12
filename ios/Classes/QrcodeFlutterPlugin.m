@@ -17,12 +17,12 @@
             UIImage *image=[[UIImage alloc]initWithContentsOfFile:path];
             NSArray *array=[QrcodeFlutterPlugin readQRCodeFromImage:image];
             NSMutableString *str = [[NSMutableString alloc] init];
+            NSMutableArray *res = [[NSMutableArray alloc] init];
                 [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     CIQRCodeFeature *temp = (CIQRCodeFeature *)obj;
-                    [str appendFormat:@"%@",temp.messageString];
+                    [res addObject:temp.messageString];
                 }];
-            NSLog(@"result = %@",str);
-            result(str);
+            result(res);
         }
 }
 + (NSArray *)readQRCodeFromImage:(UIImage *)image{ 
@@ -30,9 +30,11 @@
     CIImage *ciImage = [[CIImage alloc] initWithCGImage:image.CGImage options:nil];
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)}]; // 软件渲染
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:context options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];// 二维码识别
+    
+    [VNImageRequestHandler];
+    
     // 注意这里的CIDetectorTypeQRCode
     NSArray *features = [detector featuresInImage:ciImage];
-    NSLog(@"features = %@",features); // 识别后的结果集
     for (CIQRCodeFeature *feature in features) {
         NSLog(@"msg = %@",feature.messageString); // 打印二维码中的信息
     }

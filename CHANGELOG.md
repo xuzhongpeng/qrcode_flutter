@@ -4,6 +4,11 @@
 
 You can customize your page using by PlatformView.Scanning Picture from path(photo album).
 
-1.0.1
+## 1.0.1
 
 Modify the document
+
+## 1.0.2
+
+1. Support Android V2 embedding.
+2. Change the result of the scanned album to List

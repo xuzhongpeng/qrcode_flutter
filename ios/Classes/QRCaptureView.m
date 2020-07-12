@@ -2,7 +2,7 @@
 //  QRCaptureView.m
 //  Pods-Runner
 //
-//  Created by cdx on 2019/10/28.
+//  Created by xzp on 2020/5/15.
 //
 
 #import "QRCaptureView.h"

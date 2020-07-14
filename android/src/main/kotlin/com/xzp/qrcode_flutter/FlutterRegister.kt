@@ -27,9 +27,9 @@ object FlutterRegister {
 
     fun clear() {
         activity?.clear()
-        activity?.clear()
-        messenger = null
-        registrar = null
-        activityBinding = null
+//        activity?.clear()
+//        messenger = null
+//        registrar = null
+//        activityBinding = null
     }
 }

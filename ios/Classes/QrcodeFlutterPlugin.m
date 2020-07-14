@@ -31,7 +31,7 @@
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)}]; // 软件渲染
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:context options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];// 二维码识别
     
-    [VNImageRequestHandler];
+    // [VNImageRequestHandler];
     
     // 注意这里的CIDetectorTypeQRCode
     NSArray *features = [detector featuresInImage:ciImage];

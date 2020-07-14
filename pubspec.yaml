@@ -1,6 +1,6 @@
 name: qrcode_flutter
 description: Flutter plugin for scanning QR codes.You can customize your page by using PlatformView.Scanning Picture from path (photo album).
-version: 1.0.2
+version: 1.0.4
 # author: JSShou <xuzhongpeng.name@gmail.com>
 homepage: https://github.com/xuzhongpeng/qrcode_flutter
 

@@ -1,3 +1,7 @@
+## 1.0.5
+
+1.fix requestPermissions callback error(cause open camera error when agree permissions)
+
 ## 1.0.4
 
 1. change `implementation "com.journeyapps:zxing-android-embedded:3.5.0"` to `api "com.journeyapps:zxing-android-embedded:3.5.0"`(because the library `zxing-android-embedded` has built the class `CameraConfigurationUtils` the same as `com.google.zxing:android-core:3.2.1`)

@@ -57,28 +57,28 @@ class QrcodeFlutterPlugin : MethodChannel.MethodCallHandler, FlutterPlugin, Acti
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-
+        onAttachedToActivity(binding)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
-//        activity=null
+        onDetachedFromActivity()
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        FlutterRegister.clear()
+//        FlutterRegister.clear()
+        pluginBinding = null
     }
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        FlutterRegister.messenger=binding.binaryMessenger
-        register(binding)
+        pluginBinding = binding
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        FlutterRegister.activityBinding = binding
-        FlutterRegister.activity= WeakReference(binding.activity)
+        register(binding)
     }
 
     companion object {
+        var pluginBinding:FlutterPlugin.FlutterPluginBinding ?= null;
         @JvmStatic
         fun registerWith(registrar: Registrar) {
             FlutterRegister.registrar = registrar
@@ -89,10 +89,12 @@ class QrcodeFlutterPlugin : MethodChannel.MethodCallHandler, FlutterPlugin, Acti
             channel.setMethodCallHandler(QrcodeFlutterPlugin())
         }
         //v2 embedding
-        fun register(binding: FlutterPlugin.FlutterPluginBinding) {
-            FlutterRegister.messenger=binding.binaryMessenger
-            binding.platformViewRegistry.registerViewFactory("plugins/qr_capture_view", QRCaptureViewFactory())
-            var channel = MethodChannel(binding.binaryMessenger, "plugins/qr_capture/method")
+        fun register(binding: ActivityPluginBinding) {
+            FlutterRegister.activityBinding = binding
+            FlutterRegister.messenger=pluginBinding?.binaryMessenger
+            FlutterRegister.activity= WeakReference(binding.activity)
+            pluginBinding?.platformViewRegistry?.registerViewFactory("plugins/qr_capture_view", QRCaptureViewFactory())
+            var channel = MethodChannel(pluginBinding?.binaryMessenger, "plugins/qr_capture/method")
             channel.setMethodCallHandler(QrcodeFlutterPlugin())
         }
     }

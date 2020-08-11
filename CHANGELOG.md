@@ -1,3 +1,7 @@
+## 1.0.6
+
+1. fix small qrcode images scanning correct
+
 ## 1.0.5
 
 1.fix requestPermissions callback error(cause open camera error when agree permissions)

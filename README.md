@@ -1,8 +1,10 @@
 ![license MIT](https://img.shields.io/github/license/xuzhongpeng/qrcode_flutter)
-![license MIT](https://img.shields.io/pub/v/qrcode_flutter.svg)
-![license MIT](https://img.shields.io/badge/platform-Android%7CiOS-red)
+[![qrCode_flutter](https://img.shields.io/pub/v/qrcode_flutter.svg)](https://pub.dev/packages/qrcode_flutter)
+![iOS&Android](https://img.shields.io/badge/platform-Android%7CiOS-red)
 
 # qrcode_flutter
+
+[pub.dev](https://pub.dev/packages/qrcode_flutter)
 
 Flutter plugin for scanning QR codes.You can customize your page by using PlatformView.Scanning Picture from path(photo album).
 

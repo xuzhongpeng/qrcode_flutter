@@ -16,6 +16,8 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   String _captureText = '';
 
+  int _captureCount = 0;
+
   @override
   void initState() {
     super.initState();
@@ -24,6 +26,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       print('$data');
       setState(() {
         _captureText = data;
+        _captureCount++;
       });
     });
   }
@@ -72,6 +75,10 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
             Container(
               child: Text('$_captureText'),
+            ),
+            Container(
+              child: Text('Capture count: $_captureCount'),
+              alignment: Alignment.topCenter.add(Alignment(0, 0.2)),
             )
           ],
         ),

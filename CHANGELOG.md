@@ -1,3 +1,7 @@
+## 1.0.8
+
+1. Plugin can register many time
+
 ## 1.0.6
 
 1. fix small qrcode images scanning correct

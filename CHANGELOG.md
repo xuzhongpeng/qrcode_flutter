@@ -1,6 +1,7 @@
 ## 1.0.8
 
 1. Plugin can register many time
+2. [Improvement: allow mocking of plugin method channel](https://github.com/xuzhongpeng/qrcode_flutter/pull/4)
 
 ## 1.0.6
 

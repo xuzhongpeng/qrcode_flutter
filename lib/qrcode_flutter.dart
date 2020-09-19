@@ -13,7 +13,8 @@ class QRCaptureController {
 
   QRCaptureController();
 
-  void _onPlatformViewCreated(int id) {
+  @visibleForTesting
+  void onPlatformViewCreated(int id) {
     _methodChannel = MethodChannel('plugins/qr_capture/method_$id');
     _methodChannel.setMethodCallHandler((MethodCall call) async {
       if (call.method == 'onCaptured') {
@@ -67,7 +68,7 @@ class QRCaptureViewState extends State<QRCaptureView> {
         viewType: 'plugins/qr_capture_view',
         creationParamsCodec: StandardMessageCodec(),
         onPlatformViewCreated: (id) {
-          widget.controller._onPlatformViewCreated(id);
+          widget.controller.onPlatformViewCreated(id);
         },
       );
     } else {
@@ -75,7 +76,7 @@ class QRCaptureViewState extends State<QRCaptureView> {
         viewType: 'plugins/qr_capture_view',
         creationParamsCodec: StandardMessageCodec(),
         onPlatformViewCreated: (id) {
-          widget.controller._onPlatformViewCreated(id);
+          widget.controller.onPlatformViewCreated(id);
         },
       );
     }

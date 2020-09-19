@@ -69,11 +69,16 @@ class QrcodeFlutterPlugin : MethodChannel.MethodCallHandler, FlutterPlugin, Acti
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        register(binding)
+        //v2 embedding
+        FlutterRegister.activityBinding = binding
+        FlutterRegister.messenger=pluginBinding?.binaryMessenger
+        FlutterRegister.activity= WeakReference(binding.activity)
+        pluginBinding?.platformViewRegistry?.registerViewFactory("plugins/qr_capture_view", QRCaptureViewFactory())
+        var channel = MethodChannel(pluginBinding?.binaryMessenger, "plugins/qr_capture/method")
+        channel.setMethodCallHandler(QrcodeFlutterPlugin())
     }
-
+    var pluginBinding:FlutterPlugin.FlutterPluginBinding ?= null
     companion object {
-        var pluginBinding:FlutterPlugin.FlutterPluginBinding ?= null;
         @JvmStatic
         fun registerWith(registrar: Registrar) {
             FlutterRegister.registrar = registrar
@@ -81,15 +86,6 @@ class QrcodeFlutterPlugin : MethodChannel.MethodCallHandler, FlutterPlugin, Acti
             FlutterRegister.activity = WeakReference(registrar.activity())
             registrar.platformViewRegistry().registerViewFactory("plugins/qr_capture_view", QRCaptureViewFactory())
             var channel = MethodChannel(registrar.messenger(), "plugins/qr_capture/method")
-            channel.setMethodCallHandler(QrcodeFlutterPlugin())
-        }
-        //v2 embedding
-        fun register(binding: ActivityPluginBinding) {
-            FlutterRegister.activityBinding = binding
-            FlutterRegister.messenger=pluginBinding?.binaryMessenger
-            FlutterRegister.activity= WeakReference(binding.activity)
-            pluginBinding?.platformViewRegistry?.registerViewFactory("plugins/qr_capture_view", QRCaptureViewFactory())
-            var channel = MethodChannel(pluginBinding?.binaryMessenger, "plugins/qr_capture/method")
             channel.setMethodCallHandler(QrcodeFlutterPlugin())
         }
     }

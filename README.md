@@ -4,6 +4,13 @@
 
 # qrcode_flutter
 
+## plan
+
+- [ ] add annotation and publish 1.0.0
+- [ ] support Flutter Web
+
+## introduce
+
 [pub.dev](https://pub.dev/packages/qrcode_flutter)
 
 Flutter plugin for scanning QR codes.You can customize your page by using PlatformView.Scanning Picture from path(photo album).

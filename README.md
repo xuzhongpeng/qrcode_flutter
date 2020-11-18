@@ -4,9 +4,9 @@
 
 # qrcode_flutter
 
-## RoadMap(?-2020-11-01)
+## RoadMap
 
-- [ ] add annotation and publish 1.0.0
+- [ ] add annotation
 - [ ] support Flutter Web
 
 ## introduce

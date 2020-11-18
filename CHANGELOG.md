@@ -1,5 +1,7 @@
 ## 1.0.9
+
 1. dealloc camera view when camera page pop from flutter [pr6](https://github.com/xuzhongpeng/qrcode_flutter/pull/6)
+
 ## 1.0.8
 
 1. Plugin can register many time

@@ -2,7 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:qrcode_flutter/qrcode_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(OnePage());
+
+class OnePage extends StatefulWidget {
+  @override
+  _OnePageState createState() => _OnePageState();
+}
+
+class _OnePageState extends State<OnePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+      appBar: AppBar(
+        title: Text("qrcode_flutter"),
+      ),
+      body: Builder(builder:(context)=>RaisedButton(
+        child:Text("navigate to qrcode page"),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => MyApp()));
+        },
+      ),),)
+    );
+  }
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -35,8 +64,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text('scan'),
           actions: <Widget>[
@@ -75,7 +103,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             )
           ],
         ),
-      ),
     );
   }
 

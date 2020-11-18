@@ -3,7 +3,7 @@
 //  Runner
 //
 //  Created by xzp 2020/5/15.
-//  Copyright © 2019 The Chromium Authors. All rights reserved.
+//  Copyright © 2020 The Chromium Authors. All rights reserved.
 //
 
 #import "QRCaptureViewFactory.h"

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QRCaptureView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id _Nullable)args registrar:(NSObject<FlutterPluginRegistrar>*)registrar;
-
+- (void)pause;
 @end
 
 NS_ASSUME_NONNULL_END

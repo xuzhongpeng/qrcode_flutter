@@ -28,5 +28,9 @@
 - (nonnull UIView *)view {
     return self.captureView;
 }
+//stop camera
+- (void)dealloc{
+    [self.captureView pause];
+}
 
 @end

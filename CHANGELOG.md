@@ -1,3 +1,5 @@
+## 1.0.9
+1. dealloc camera view when camera page pop from flutter
 ## 1.0.8
 
 1. Plugin can register many time

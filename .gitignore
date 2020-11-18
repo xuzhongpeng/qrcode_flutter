@@ -12,4 +12,6 @@ example/.dart_tool
 
 .dart_tool
 .idea
+example/android/.settings
+android/.settings
 publish.sh

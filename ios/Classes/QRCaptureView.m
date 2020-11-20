@@ -44,7 +44,10 @@
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         AVCaptureDeviceInput *input = [[AVCaptureDeviceInput alloc] initWithDevice:device error:nil];
         AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
-        [self.session addInput:input];
+        if ([session canAddInput: input])
+        {
+            [self.session addInput: input];
+        }
         [self.session addOutput:output];
         self.session.sessionPreset = AVCaptureSessionPresetHigh;
        

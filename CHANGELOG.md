@@ -1,11 +1,12 @@
 ## 2.0.0
 
-1. fix [#5 add dispose method](https://github.com/xuzhongpeng/qrcode_flutter/issues/5)
-2. fix [10 相机不允许使用时，打开扫码功能会闪退](https://github.com/xuzhongpeng/qrcode_flutter/issues/10)
-
+1. fix [issue7--divide by zero](https://github.com/xuzhongpeng/qrcode_flutter/issues/7).Fixed only by upgrade [zixing4.0.2](https://github.com/journeyapps/zxing-android-embedded/issues/334)
 ## 1.0.10
+
 1. fix [issue8--Can't add a nil AVCaptureInput](https://github.com/xuzhongpeng/qrcode_flutter/issues/8)
-2. fix [issue7--divide by zero](https://github.com/xuzhongpeng/qrcode_flutter/issues/7).Fixed only by upgrade [zixing4.0.2](https://github.com/journeyapps/zxing-android-embedded/issues/334)
+2. fix [#5 add dispose method](https://github.com/xuzhongpeng/qrcode_flutter/issues/5)
+3. fix [10 相机不允许使用时，打开扫码功能会闪退](https://github.com/xuzhongpeng/qrcode_flutter/issues/10)
+
 ## 1.0.9
 
 1. dealloc camera view when camera page pop from flutter [pr6](https://github.com/xuzhongpeng/qrcode_flutter/pull/6)

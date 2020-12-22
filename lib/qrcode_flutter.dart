@@ -33,6 +33,10 @@ class QRCaptureController {
     _methodChannel?.invokeMethod('resume');
   }
 
+  void dispose() {
+    _methodChannel?.invokeMethod('resume');
+  }
+  
   void onCapture(CaptureCallback capture) {
     _capture = capture;
   }

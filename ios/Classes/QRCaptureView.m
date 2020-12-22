@@ -37,7 +37,7 @@
         AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
         self.captureLayer = layer;
         
-        layer.backgroundColor = [UIColor yellowColor].CGColor;
+        layer.backgroundColor = [UIColor darkGrayColor].CGColor;
         [self.layer addSublayer:layer];
         layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         
@@ -56,10 +56,13 @@
        
         output.metadataObjectTypes = output.availableMetadataObjectTypes;
         [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-        [output setMetadataObjectTypes:@[AVMetadataObjectTypeUPCECode, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode39Mod43Code,
-        AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode93Code, AVMetadataObjectTypeCode128Code,
-        AVMetadataObjectTypePDF417Code, AVMetadataObjectTypeQRCode, AVMetadataObjectTypeAztecCode]];
-        
+        // setMetadataObjectTypes when input is not nil
+        if (input)
+        {
+            [output setMetadataObjectTypes:@[AVMetadataObjectTypeUPCECode, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode39Mod43Code,
+            AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode93Code, AVMetadataObjectTypeCode128Code,
+            AVMetadataObjectTypePDF417Code, AVMetadataObjectTypeQRCode, AVMetadataObjectTypeAztecCode]];
+        }
         [self.session startRunning];
     }
     return self;

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:qrcode_flutter/qrcode_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-void main() => runApp(OnePage());
-
-class OnePage extends StatefulWidget {
+void main() => runApp(_MyPage());
+class _MyPage extends StatefulWidget {
   @override
   _OnePageState createState() => _OnePageState();
 }
 
-class _OnePageState extends State<OnePage> {
+class _OnePageState extends State<_MyPage> {
   @override
   void initState() {
     super.initState();
@@ -33,6 +32,7 @@ class _OnePageState extends State<OnePage> {
   }
 }
 
+/// 
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();

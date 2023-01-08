@@ -17,3 +17,4 @@ android/.settings
 publish.sh
 qrcode_flutter.iml
 .vscode/
+.metadata

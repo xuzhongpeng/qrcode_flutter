@@ -28,7 +28,6 @@ class QRCaptureController {
 
   /// 初始化方法，必须初始化
   /// The initialization method must be initialized
-  @visibleForTesting
   void onPlatformViewCreated(int id) {
     _methodChannel = MethodChannel('plugins/qr_capture/method_$id');
     _methodChannel?.setMethodCallHandler((MethodCall call) async {

@@ -3,6 +3,7 @@ import 'package:qrcode_flutter/qrcode_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(_MyPage());
+
 class _MyPage extends StatefulWidget {
   @override
   _OnePageState createState() => _OnePageState();
@@ -17,22 +18,24 @@ class _OnePageState extends State<_MyPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
+        home: Scaffold(
       appBar: AppBar(
         title: Text("qrcode_flutter"),
       ),
-      body: Builder(builder:(context)=>RaisedButton(
-        child:Text("navigate to qrcode page"),
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => MyApp()));
-        },
-      ),),)
-    );
+      body: Builder(
+        builder: (context) => TextButton(
+          child: Text("navigate to qrcode page"),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => MyApp()));
+          },
+        ),
+      ),
+    ));
   }
 }
 
-/// 
+///
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -65,44 +68,44 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('scan'),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () async {
-                PickedFile image =
-                    await ImagePicker().getImage(source: ImageSource.gallery);
-                var qrCodeResult =
-                    await QRCaptureController.getQrCodeByImagePath(image.path);
-                setState(() {
-                  _captureText = qrCodeResult.join('\n');
-                });
-              },
-              child: Text('photoAlbum', style: TextStyle(color: Colors.white)),
+      appBar: AppBar(
+        title: const Text('scan'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              PickedFile image =
+                  await ImagePicker().getImage(source: ImageSource.gallery);
+              var qrCodeResult =
+                  await QRCaptureController.getQrCodeByImagePath(image.path);
+              setState(() {
+                _captureText = qrCodeResult.join('\n');
+              });
+            },
+            child: Text('photoAlbum', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            width: 300,
+            height: 300,
+            child: QRCaptureView(
+              controller: _controller,
             ),
-          ],
-        ),
-        body: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Container(
-              width: 300,
-              height: 300,
-              child: QRCaptureView(
-                controller: _controller,
-              ),
+          ),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: _buildToolBar(),
             ),
-            SafeArea(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: _buildToolBar(),
-              ),
-            ),
-            Container(
-              child: Text('$_captureText'),
-            )
-          ],
-        ),
+          ),
+          Container(
+            child: Text('$_captureText'),
+          )
+        ],
+      ),
     );
   }
 
@@ -111,13 +114,13 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             _controller.pause();
           },
           child: Text('pause'),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             if (_isTorchOn) {
               _controller.torchMode = CaptureTorchMode.off;
@@ -128,7 +131,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           },
           child: Text('torch'),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             _controller.resume();
           },

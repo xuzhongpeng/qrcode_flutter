@@ -99,7 +99,7 @@ class QRCaptureView(id: Int) :
 
     init {
         FlutterRegister.addRequestPermissionsResultListener(CameraRequestPermissionsListener())
-        channel = MethodChannel(FlutterRegister.messenger, "plugins/qr_capture/method_$id")
+        channel = MethodChannel(FlutterRegister.messenger!!, "plugins/qr_capture/method_$id")
         channel.setMethodCallHandler(this)
         checkAndRequestPermission(null)
         val barcode = BarcodeView(FlutterRegister.getActivity())

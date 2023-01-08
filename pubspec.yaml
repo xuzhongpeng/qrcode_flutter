@@ -11,10 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  plugin_platform_interface: any
+  flutter_web_plugins:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   plugin:
@@ -24,3 +28,8 @@ flutter:
         pluginClass: QrcodeFlutterPlugin 
       ios:
         pluginClass: QrcodeFlutterPlugin
+      web:
+        pluginClass: QrcodeFlutterWeb
+        fileName: qrcode_flutter_web.dart
+  assets:
+    - assets/

@@ -99,7 +99,7 @@ class QRCaptureView(id: Int) :
 
     init {
         FlutterRegister.addRequestPermissionsResultListener(CameraRequestPermissionsListener())
-        channel = MethodChannel(FlutterRegister.messenger, "plugins/qr_capture/method_$id")
+        channel = MethodChannel(FlutterRegister.messenger!!, "plugins/qr_capture/method_$id")
         channel.setMethodCallHandler(this)
         checkAndRequestPermission(null)
         val barcode = BarcodeView(FlutterRegister.getActivity())
@@ -118,31 +118,31 @@ class QRCaptureView(id: Int) :
 
         FlutterRegister.getActivity()?.application?.registerActivityLifecycleCallbacks(
                 object : Application.ActivityLifecycleCallbacks {
-                    override fun onActivityPaused(p0: Activity?) {
+                    override fun onActivityPaused(p0: Activity) {
                         if (p0 == FlutterRegister.getActivity()) {
                             barcodeView?.pause()
                         }
                     }
 
-                    override fun onActivityResumed(p0: Activity?) {
+                    override fun onActivityResumed(p0: Activity) {
                         if (p0 == FlutterRegister.getActivity()) {
                             barcodeView?.resume()
                         }
                     }
 
-                    override fun onActivityStarted(p0: Activity?) {
+                    override fun onActivityStarted(p0: Activity) {
                     }
 
-                    override fun onActivityDestroyed(p0: Activity?) {
+                    override fun onActivityDestroyed(p0: Activity) {
                     }
 
-                    override fun onActivitySaveInstanceState(p0: Activity?, p1: Bundle?) {
+                    override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
                     }
 
-                    override fun onActivityStopped(p0: Activity?) {
+                    override fun onActivityStopped(p0: Activity) {
                     }
 
-                    override fun onActivityCreated(p0: Activity?, p1: Bundle?) {
+                    override fun onActivityCreated(p0: Activity, p1: Bundle?) {
                     }
                 }
         )

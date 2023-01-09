@@ -15,3 +15,6 @@ example/.dart_tool
 example/android/.settings
 android/.settings
 publish.sh
+qrcode_flutter.iml
+.vscode/
+.metadata

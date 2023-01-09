@@ -1,7 +1,5 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_plugin_android_lifecycle (0.0.1):
-    - Flutter
   - image_picker (0.0.1):
     - Flutter
   - qrcode_flutter (0.0.1):
@@ -9,26 +7,22 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - qrcode_flutter (from `.symlinks/plugins/qrcode_flutter/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_plugin_android_lifecycle:
-    :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
   qrcode_flutter:
     :path: ".symlinks/plugins/qrcode_flutter/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
-  image_picker: 66aa71bc96850a90590a35d4c4a2907b0d823109
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  image_picker: 9aa50e1d8cdacdbed739e925b7eea16d014367e6
   qrcode_flutter: de88a439c5eebe01b38b647af520e674770d4462
 
-PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

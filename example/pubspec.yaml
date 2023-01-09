@@ -20,6 +20,6 @@ dev_dependencies:
 
   qrcode_flutter:
     path: ../
-  image_picker: 0.6.7+1
+  image_picker: 0.8.4+2
 flutter:
   uses-material-design: true

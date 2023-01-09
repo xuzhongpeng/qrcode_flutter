@@ -1,11 +1,13 @@
-include: package:pedantic/analysis_options.1.9.0.yaml
+include: package:flutter_lints/flutter.yaml
 analyzer:
-  # enable-experiment:
-  #   - non-nullable
+  exclude:
+    - example/**
+    - build/**
   errors:
     unused_import: warning
     unused_local_variable: warning
     public_member_api_docs: warning
+    undefined_prefixed_name: ignore
 linter:
   rules:
     public_member_api_docs: true

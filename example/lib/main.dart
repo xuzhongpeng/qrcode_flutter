@@ -35,7 +35,6 @@ class _OnePageState extends State<_MyPage> {
   }
 }
 
-///
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -58,12 +57,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         _captureText = data;
       });
     });
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
   }
 
   @override

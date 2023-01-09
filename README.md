@@ -1,13 +1,8 @@
 ![license MIT](https://img.shields.io/github/license/xuzhongpeng/qrcode_flutter)
 [![qrCode_flutter](https://img.shields.io/pub/v/qrcode_flutter.svg)](https://pub.dev/packages/qrcode_flutter)
-![iOS&Android](https://img.shields.io/badge/platform-Android%7CiOS-red)
+![iOS&Android](https://img.shields.io/badge/platform-Android%7CiOS%7CWeb-red)
 
 # qrcode_flutter
-
-## RoadMap
-
-- [ ] add annotation
-- [ ] support Flutter Web
 
 ## introduce
 
@@ -20,10 +15,17 @@ You can download [flutter_demo.apk](https://blog-1253495453.cos.ap-chongqing.myq
 ## Usage
 
 ```dart
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   QRCaptureController _controller = QRCaptureController();
 
   bool _isTorchOn = false;
+
+  String _captureText = '';
 
   @override
   void initState() {
@@ -31,74 +33,86 @@ class _MyAppState extends State<MyApp> {
 
     _controller.onCapture((data) {
       print('$data');
+      setState(() {
+        _captureText = data;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('scan'),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () async {
-                PickedFile image =
-                    await ImagePicker().getImage(source: ImageSource.gallery);
-                var qrCodeResult =
-                    await QRCaptureController.getQrCodeByImagePath(image.path);
-                setState(() {
-                  _captureText = qrCodeResult.join('\n');
-                });
-              },
-              child: Text('photoAlbum', style: TextStyle(color: Colors.white)),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('scan'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              PickedFile image =
+                  await ImagePicker().getImage(source: ImageSource.gallery);
+              var qrCodeResult =
+                  await QRCaptureController.getQrCodeByImagePath(image.path);
+              setState(() {
+                _captureText = qrCodeResult.join('\n');
+              });
+            },
+            child: Text('photoAlbum', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            width: 300,
+            height: 300,
+            child: QRCaptureView(
+              controller: _controller,
             ),
-          ],
-        ),
-        body: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            QRCaptureView(controller: _controller),
-            Align(
+          ),
+          SafeArea(
+            child: Align(
               alignment: Alignment.bottomCenter,
               child: _buildToolBar(),
-            )
-          ],
-        ),
+            ),
+          ),
+          Container(
+            child: Text('$_captureText'),
+          )
+        ],
       ),
     );
   }
 
   Widget _buildToolBar() {
     return Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FlatButton(
-              onPressed: () {
-                _controller.pause();
-              },
-              child: Text('pause'),
-            ),
-            FlatButton(
-              onPressed: () {
-                if (_isTorchOn) {
-                  _controller.torchMode = CaptureTorchMode.off;
-                } else {
-                  _controller.torchMode = CaptureTorchMode.on;
-                }
-                _isTorchOn = !_isTorchOn;
-              },
-              child: Text('torch'),
-            ),
-            FlatButton(
-              onPressed: () {
-                _controller.resume();
-              },
-              child: Text('resume'),
-            )
-          ],
-        );
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        TextButton(
+          onPressed: () {
+            _controller.pause();
+          },
+          child: Text('pause'),
+        ),
+        TextButton(
+          onPressed: () {
+            if (_isTorchOn) {
+              _controller.torchMode = CaptureTorchMode.off;
+            } else {
+              _controller.torchMode = CaptureTorchMode.on;
+            }
+            _isTorchOn = !_isTorchOn;
+          },
+          child: Text('torch'),
+        ),
+        TextButton(
+          onPressed: () {
+            _controller.resume();
+          },
+          child: Text('resume'),
+        ),
+      ],
+    );
   }
 }
 ```

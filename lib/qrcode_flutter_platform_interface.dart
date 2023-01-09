@@ -5,7 +5,7 @@ import 'qrcode_flutter_io.dart';
 
 /// get qrcode data in callback
 /// 定义回调函数，返回扫码数据
-typedef CaptureCallback(String data);
+typedef CaptureCallback = Function(String data);
 
 /// PhoneTorch
 /// 闪光灯开关

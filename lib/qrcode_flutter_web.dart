@@ -18,11 +18,11 @@ const String _tag = '[qrcode_flutter_web]';
 /// A web implementation of the QrcodeFlutterPlatform of the QrcodeFlutter plugin.
 class QrcodeFlutterWeb extends QrcodeFlutterPlatform {
   final String _viewType = 'flutter_plugin_camera';
-  final bool _pedding = true;
   CaptureCallback? _capture;
 
   /// Constructs a QrcodeFlutterWeb
   QrcodeFlutterWeb() {
+    // ignore:undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
         _viewType,
         (int viewId) => html.DivElement()

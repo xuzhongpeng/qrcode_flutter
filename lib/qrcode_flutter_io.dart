@@ -77,13 +77,34 @@ class QRCodeFlutterIO extends QrcodeFlutterPlatform {
   }
 
   @override
-  Widget buildWidget() {
+  Widget buildWidget() => _QrCodeView(qrCodeFlutterIO: this);
+}
+
+class _QrCodeView extends StatefulWidget {
+  final QRCodeFlutterIO qrCodeFlutterIO;
+  const _QrCodeView({Key? key, required this.qrCodeFlutterIO})
+      : super(key: key);
+
+  @override
+  State<_QrCodeView> createState() => __QrCodeViewState();
+}
+
+class __QrCodeViewState extends State<_QrCodeView> {
+
+  @override
+  void dispose() {
+    widget.qrCodeFlutterIO.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return UiKitView(
         viewType: 'plugins/qr_capture_view',
         creationParamsCodec: const StandardMessageCodec(),
         onPlatformViewCreated: (id) {
-          _onPlatformViewCreated(id);
+          widget.qrCodeFlutterIO._onPlatformViewCreated(id);
         },
       );
     } else {
@@ -91,7 +112,7 @@ class QRCodeFlutterIO extends QrcodeFlutterPlatform {
         viewType: 'plugins/qr_capture_view',
         creationParamsCodec: const StandardMessageCodec(),
         onPlatformViewCreated: (id) {
-          _onPlatformViewCreated(id);
+          widget.qrCodeFlutterIO._onPlatformViewCreated(id);
         },
       );
     }

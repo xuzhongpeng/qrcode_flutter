@@ -1,27 +1,7 @@
-console.log("yes");
-
-// console.log(Html5QrcodeScanner)
-
-// let html5QrcodeScanner = new Html5QrcodeScanner(
-//   "flutter_plugin_camera",
-//   { fps: 10, qrbox: { width: 250, height: 250 } },
-//   /* verbose= */ false
-// );
-// function onScanSuccess(decodedText, decodedResult) {
-//   // handle the scanned code as you like, for example:
-//   console.log(`Code matched = ${decodedText}`, decodedResult);
-// }
-
-// function onScanFailure(error) {
-//   // handle scan failure, usually better to ignore and keep scanning.
-//   // for example:
-//   console.warn(`Code scan error = ${error}`);
-// }
-// html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 ((window) => {
   let html5QrCode;
+  let cameraId;
   // build camera view
-  console.log(window);
   window.firstBuild = (width, height) => {
     console.log("build view");
     html5QrCode = new Html5Qrcode(
@@ -30,9 +10,8 @@ console.log("yes");
     );
     Html5Qrcode.getCameras()
       .then((devices) => {
-        console.log(devices);
         if (devices && devices.length) {
-          var cameraId = devices[0].id;
+          cameraId = devices[0].id;
           // .. use this to start scanning.
           html5QrCode
             .start(
@@ -47,7 +26,7 @@ console.log("yes");
             )
             .catch((err) => {
               // Start failed, handle it.
-              console.log("err" + err);
+              console.error("[qrcode_flutter] start err:" + err);
             });
         }
       })
@@ -56,8 +35,8 @@ console.log("yes");
       });
   };
 
-  window.rebuild = () => {
-    stop();
+  window.rebuild = async (width, height) => {
+    await stop();
     html5QrCode
       .start(
         cameraId,
@@ -71,35 +50,31 @@ console.log("yes");
       )
       .catch((err) => {
         // Start failed, handle it.
-        console.log("err" + err);
+        console.log("[qrcode_flutter] start err:" + err);
       });
   };
 
   window.stop = () => {
-    html5QrCode
-      ?.stop()
-      .then((ignore) => {
-        // QR Code scanning is stopped.
-      })
-      .catch((err) => {
-        // Stop failed, handle it.
-      });
+    return html5QrCode?.stop().catch((err) => {
+      console.log("[qrcode_flutter] stop err:" + err);
+    });
   };
   window.dispose = () => {
     stop();
     html5QrCode = null;
   };
   window.pause = () => {
-    html5QrCode?.pause();
+    try {
+      html5QrCode?.pause();
+    } catch (err) {
+      console.error("[qrcode_flutter] pause err:" + err);
+    }
   };
   window.resume = () => {
-    html5QrCode
-      ?.resume()
-      .then((ignore) => {
-        // QR Code scanning is stopped.
-      })
-      .catch((err) => {
-        // Stop failed, handle it.
-      });
+    try {
+      html5QrCode?.resume();
+    } catch (err) {
+      console.log("[qrcode_flutter] resume err:" + err);
+    }
   };
 })(window);

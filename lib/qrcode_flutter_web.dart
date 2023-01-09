@@ -13,9 +13,12 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'qrcode_flutter_platform_interface.dart';
 
+const String _tag = '[qrcode_flutter_web]';
+
 /// A web implementation of the QrcodeFlutterPlatform of the QrcodeFlutter plugin.
 class QrcodeFlutterWeb extends QrcodeFlutterPlatform {
   final String _viewType = 'flutter_plugin_camera';
+  final bool _pedding = true;
   CaptureCallback? _capture;
 
   /// Constructs a QrcodeFlutterWeb
@@ -32,7 +35,7 @@ class QrcodeFlutterWeb extends QrcodeFlutterPlatform {
       ..type = 'application/javascript');
     html.document.body!.append(html.ScriptElement()
       ..src =
-          'assets/packages/qrcode_flutter/assets/bundle.js' // ignore: unsafe_html
+          'assets/packages/qrcode_flutter/assets/qrcode_flutter_web.js' // ignore: unsafe_html
       ..type = 'application/javascript');
     js_util.setProperty(html.window, "onCapture", js.allowInterop((args) {
       _capture?.call(args);
@@ -52,8 +55,7 @@ class QrcodeFlutterWeb extends QrcodeFlutterPlatform {
 
   @override
   Future<List<String>> getQrCodeByImagePath(String path) {
-    // TODO: implement getQrCodeByImagePath
-    throw UnimplementedError();
+    throw UnimplementedError('$_tag not support getQrCodeByImagePath on Web');
   }
 
   @override
@@ -73,16 +75,24 @@ class QrcodeFlutterWeb extends QrcodeFlutterPlatform {
 
   @override
   set torchMode(CaptureTorchMode mode) {
-    // TODO: implement torchMode
+    if (kDebugMode) {
+      print('$_tag not support torchMode on Web');
+    }
   }
 
   @override
-  Widget buildWidget() => _QRcodeFlutter(viewType: _viewType);
+  Widget buildWidget() => _QRcodeFlutter(
+        viewType: _viewType,
+        controller: this,
+      );
 }
 
 class _QRcodeFlutter extends StatefulWidget {
   final String viewType;
-  const _QRcodeFlutter({Key? key, required this.viewType}) : super(key: key);
+  final QrcodeFlutterWeb controller;
+  const _QRcodeFlutter(
+      {Key? key, required this.viewType, required this.controller})
+      : super(key: key);
 
   @override
   State<_QRcodeFlutter> createState() => __QRcodeFlutterState();
@@ -97,6 +107,12 @@ class __QRcodeFlutterState extends State<_QRcodeFlutter> {
   double? _width;
   double? _height;
 
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+
   _init(double width, double height) {
     if (_width != width || _height != height) {
       if (_width != null && _height != null) {
@@ -107,7 +123,7 @@ class __QRcodeFlutterState extends State<_QRcodeFlutter> {
           });
         } catch (e) {
           if (kDebugMode) {
-            print('rebuild error: $e');
+            print('$_tag rebuild error: $e');
           }
         }
       } else {
@@ -117,7 +133,7 @@ class __QRcodeFlutterState extends State<_QRcodeFlutter> {
           });
         } catch (e) {
           if (kDebugMode) {
-            print('firstBuild error: $e');
+            print('$_tag firstBuild error: $e');
           }
         }
       }

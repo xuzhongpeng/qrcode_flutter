@@ -1,3 +1,9 @@
+## 3.1.0
+1. upgrade kotlin to 1.7.21 since 1.3.40 is too old
+2. upgrade zxing android to [latest 4.3.0](https://mvnrepository.com/artifact/com.journeyapps/zxing-android-embedded)
+3. remove unused android plugin:kapt and kae since this will block kotlin upgrade of 1.8+
+4. change android jcenter to mavenCentral since jcenter is abandoned in 2021
+5. upgrade agp from 3.2.1 to 4.2.2 since 3.2.1 is too old and 4.2.2 is last stable release of agp 4+
 ## 3.0.0-nullsafety.0
 1. Support null safety
 ## 2.0.1
